@@ -1,19 +1,22 @@
 ### ArmorPaint
 
-- Description: Stand-alone software designed for physically-based texture painting.
+- Overview: Stand-alone software designed for physically-based texture painting.
 - Website: https://armorpaint.org/
 - GitHub: https://github.com/armory3d/armortools
+- Download: https://armorpaint.org/download
 
 ### Gale
 
-- Description: Lightweight and modern mod manager for Thunderstore.
+- Overview: Lightweight and modern mod manager for Thunderstore.
 - Website: https://kesomannen.com/gale
 - GitHub: https://github.com/Kesomannen/gale
+- Download: https://github.com/Kesomannen/gale/releases
 
 ### Limo
 
-- Description: General purpose mod manager with support for the NexusMods API and LOOT.
+- Overview: General purpose mod manager with support for the NexusMods API and LOOT.
 - GitHub: https://github.com/limo-app/limo
+- Download: https://flathub.org/en/apps/io.github.limo_app.limo
 
 ### Material Maker
 

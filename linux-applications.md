@@ -64,6 +64,12 @@
 
 ### LibreOffice
 
-- Description:
+- Description: An office suite for word processing, spreadsheets, presentations, graphics, databases, and math.
 - Website: https://www.libreoffice.org/
 - GitHub: https://github.com/LibreOffice/core
+
+### Easy Effects
+
+- Description: Applies real-time audio effects (limiter, compressor, equalizer, etc.) to PipeWire applications on Linux.
+- Website: https://wwmm.github.io/easyeffects
+- GitHub: https://github.com/wwmm/easyeffects

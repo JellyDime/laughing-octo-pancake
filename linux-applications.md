@@ -82,7 +82,7 @@
 
 ### Okular
 
-- Description: Universal document viewer developed by KDE for viewing and annotating PDFs, eBooks, images, and more.
+- Description: Universal document viewer for viewing and annotating PDFs, eBooks, images, and more.
 - Website: https://okular.kde.org/
 - GitLab: https://invent.kde.org/graphics/okular
 

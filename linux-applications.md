@@ -50,3 +50,20 @@
 - Description: Desktop static CMS for building fast, secure static websites locally.
 - Website: https://getpublii.com/
 - GitHub: https://github.com/GetPublii/Publii
+
+### Sober
+
+- Description: Experimental interoperability layer that lets you run Roblox Player on Linux.
+- Website: https://sober.vinegarhq.org/
+
+### Vinegar
+
+- Description: Fast bootstrapper that lets you run Roblox Studio on Linux.
+- Website: https://vinegarhq.org/
+- GitHub: https://github.com/vinegarhq/vinegar
+
+### LibreOffice
+
+- Description:
+- Website: https://www.libreoffice.org/
+- GitHub: https://github.com/LibreOffice/core

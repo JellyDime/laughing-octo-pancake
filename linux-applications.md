@@ -112,3 +112,10 @@
 - Description: 3D model editor specialized for low‑poly models and pixel-art textures, with strong Minecraft support.
 - Website: https://www.blockbench.net/
 - GitHub: https://github.com/JannisX11/blockbench
+
+### LMMS
+
+- Overview:
+- Website: https://lmms.io/
+- GitHub: https://github.com/LMMS/lmms
+- Download: https://lmms.io/download#linux

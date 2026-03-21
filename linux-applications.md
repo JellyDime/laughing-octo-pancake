@@ -1,129 +1,129 @@
 ### ArmorPaint
 
-- Overview: Stand-alone software designed for physically-based texture painting.
+- Overview: A GPU-accelerated tool for physically-based 3D texture painting and material creation.
 - Website: https://armorpaint.org/
 - Source Code: https://github.com/armory3d/armortools
 - Download: https://armorpaint.org/download
 
 ### Gale
 
-- Overview: Lightweight and modern mod manager for Thunderstore.
+- Overview: A lightweight mod manager for Thunderstore that installs, updates, and organizes mods and modpacks.
 - Website: https://kesomannen.com/gale
 - Source Code: https://github.com/Kesomannen/gale
 - Download: https://github.com/Kesomannen/gale/releases
 
 ### Limo
 
-- Overview: General purpose mod manager with support for the NexusMods API and LOOT.
+- Overview: A general-purpose mod manager with NexusMods API and LOOT integration, for managing, sorting, and deploying game mods.
 - Source Code: https://github.com/limo-app/limo
 - Download: https://flathub.org/en/apps/io.github.limo_app.limo
 
 ### Material Maker
 
-- Overview: Procedural texture-authoring and 3D model painting tool built on the Godot engine.
+- Overview: 
 - Website: https://www.materialmaker.org/
 - Source Code: https://github.com/RodZill4/material-maker
 - Download: https://rodzilla.itch.io/material-maker
 
 ### Scribus
 
-- Overview: Desktop publishing application for professional page layout and print-ready output.
+- Overview: 
 - Website: https://www.scribus.net/
 - Source Code: https://sourceforge.net/projects/scribus/
 - Download: https://flathub.org/en/apps/net.scribus.Scribus
 
 ### Friction
 
-- Overview: 2D animation and motion graphics application for vector and raster animations.
+- Overview: 
 - Website: https://friction.graphics/
 - Source Code: https://github.com/friction2d/friction
 - Download: https://friction.graphics/download.html
 
 ### Blender
 
-- Overview: 3D creation suite for modeling, animation, simulation, rendering, compositing and video editing.
+- Overview: 
 - Website: https://www.blender.org/
 - Source Code: https://projects.blender.org/blender/blender
 - Download: https://www.blender.org/download/
 
 ### Frappe Builder
 
-- Overview: Low‑code website builder for visually creating and publishing fast, modern websites.
+- Overview: 
 - Website: https://frappe.io/builder
 - Source Code: https://github.com/frappe/builder
 
 ### Publii
 
-- Overview: Desktop static CMS for building fast, secure static websites locally.
+- Overview: 
 - Website: https://getpublii.com/
 - Source Code: https://github.com/GetPublii/Publii
 - Download: https://getpublii.com/download/
 
 ### Sober
 
-- Overview: Experimental interoperability layer that lets you run Roblox Player.
+- Overview: 
 - Website: https://sober.vinegarhq.org/
 - Download: https://flathub.org/en/apps/org.vinegarhq.Sober
 
 ### Vinegar
 
-- Overview: Fast bootstrapper that lets you run Roblox Studio.
+- Overview: 
 - Website: https://vinegarhq.org/
 - Source Code: https://github.com/vinegarhq/vinegar
 - Download: https://flathub.org/en/apps/org.vinegarhq.Vinegar
 
 ### LibreOffice
 
-- Overview: Office suite for word processing, spreadsheets, presentations, graphics, databases, and math.
+- Overview: 
 - Website: https://www.libreoffice.org/
 - Source Code: https://github.com/LibreOffice/core
 - Download: https://flathub.org/en/apps/org.libreoffice.LibreOffice
 
 ### Easy Effects
 
-- Overview: Applies real-time audio effects (limiter, compressor, equalizer, etc.) to PipeWire applications.
+- Overview: 
 - Website: https://wwmm.github.io/easyeffects
 - Source Code: https://github.com/wwmm/easyeffects
 - Download: https://flathub.org/en/apps/com.github.wwmm.easyeffects
 
 ### Ruffle
 
-- Overview: Adobe Flash Player emulator written in Rust, targeting desktop and web via WebAssembly.
+- Overview: 
 - Website: https://ruffle.rs/
 - Source Code: https://github.com/ruffle-rs/ruffle
 - Download: https://flathub.org/en/apps/rs.ruffle.Ruffle
 
 ### Okular
 
-- Overview: Universal document viewer for viewing and annotating PDFs, eBooks, images, and more.
+- Overview: 
 - Website: https://okular.kde.org/
 - Source Code: https://invent.kde.org/graphics/okular
 - Download: https://flathub.org/en/apps/org.kde.okular
 
 ### Kdenlive
 
-- Overview: Non-linear video editor.
+- Overview: 
 - Website: https://kdenlive.org/
 - Source Code: https://invent.kde.org/multimedia/kdenlive
 - Download: https://flathub.org/en/apps/org.kde.kdenlive
 
 ### MKVToolNix
 
-- Overview: Set of tools to create, alter, and inspect Matroska (MKV) files.
+- Overview: 
 - Website: https://mkvtoolnix.download/
 - Source Code: https://codeberg.org/mbunkus/mkvtoolnix
 - Download: https://flathub.org/en/apps/org.bunkus.mkvtoolnix-gui
 
 ### Inkscape
 
-- Overview: Vector graphics editor for creating and editing SVG images.
+- Overview: 
 - Website: https://inkscape.org/
 - Source Code: https://gitlab.com/inkscape/inkscape
 - Download: https://flathub.org/en/apps/org.inkscape.Inkscape
 
 ### Blockbench
 
-- Overview: 3D model editor specialized for low‑poly models and pixel-art textures, with strong Minecraft support.
+- Overview: 
 - Website: https://www.blockbench.net/
 - Source Code: https://github.com/JannisX11/blockbench
 - Download: https://www.blockbench.net/downloads

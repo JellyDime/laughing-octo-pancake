@@ -148,3 +148,24 @@
 - Website: https://natrongithub.github.io/
 - Source Code: https://github.com/NatronGitHub/Natron
 - Download: https://natrongithub.github.io/#download
+
+### darktable
+
+- Overview: A photography workflow tool and non-destructive raw developer for organizing and editing raw images.
+- Website: https://www.darktable.org/
+- Source Code: https://github.com/darktable-org/darktable
+- Download: https://flathub.org/en/apps/org.darktable.Darktable
+
+### GIMP
+
+- Overview: An image editor for photo retouching, composition, and authoring with sophisticated manipulation tools.
+- Website: https://www.gimp.org/
+- Source Code: https://gitlab.gnome.org/GNOME/gimp
+- Download: https://flathub.org/en/apps/org.gimp.GIMP
+
+### Krita
+
+- Overview: A professional digital painting program for creating illustrations, comics, concept art, and textures.
+- Website: https://krita.org/en/
+- Source Code: https://invent.kde.org/graphics/krita
+- Download: https://flathub.org/en/apps/org.kde.krita

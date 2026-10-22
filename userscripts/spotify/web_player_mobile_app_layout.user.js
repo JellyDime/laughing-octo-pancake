@@ -4,7 +4,7 @@
 // @description  Rebuilds Spotify's desktop web player as a phone-app style UI: native home header with filter chips, 2-column shortcut cards, bottom tab navigation, mini player, and a full-screen Now Playing view with blurred-cover background and Canvas video support.
 // @icon         https://external-content.duckduckgo.com/ip3/spotify.com.ico
 // @match        https://open.spotify.com/*
-// @version      27.9.0
+// @version      27.9.1
 // @copyright    GPL-3.0-or-later
 // @grant        none
 // @noframes

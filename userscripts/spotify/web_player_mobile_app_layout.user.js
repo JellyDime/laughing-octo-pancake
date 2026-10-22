@@ -4,7 +4,7 @@
 // @description  Rebuilds Spotify's desktop web player as a phone-app style UI: native home header with filter chips, 2-column shortcut cards, bottom tab navigation, mini player, and a full-screen Now Playing view with blurred-cover background and Canvas video support.
 // @icon         https://external-content.duckduckgo.com/ip3/spotify.com.ico
 // @match        https://open.spotify.com/*
-// @version      27.9.1
+// @version      26.10.0
 // @copyright    GPL-3.0-or-later
 // @grant        none
 // @noframes
@@ -15,7 +15,7 @@
 // ==/UserScript==
 
 /*
- * Architecture (v27 — full rewrite of the mobile layout strategy)
+ * Architecture (v26 — full rewrite of the mobile layout strategy)
  *
  * Previous versions restructured Spotify's own now-playing bar with grids and
  * padding. This version leaves the native <aside data-testid="now-playing-bar">
@@ -45,20 +45,20 @@
  * (All / Music / Podcasts, mirrored into the bar so React keeps owning the
  * originals) on Home, or a custom search field on Search.
  *
- *   - v27.1: bottom chrome restyled to match the native phone app even
+ *   - v26.1: bottom chrome restyled to match the native phone app even
  *     closer — icon-only tab bar (no labels) on pure black, slimmer mini
  *     player (play/pause only, full-bleed progress hairline), pure-black
  *     page background, square shelf cards with title/subtitle below the
  *     art, 24px greeting.
  *
- *   - v27.2: the Library tab no longer navigates to /collection/playlists.
+ *   - v26.2: the Library tab no longer navigates to /collection/playlists.
  *     That route is gone from the web player's route table (it falls back
  *     to the /collection → /collection/tracks redirect, i.e. Liked Songs).
  *     The tab now reveals the native library panel (#Desktop_LeftSidebar_Id)
  *     as the main view, expanding it and switching it to its full-page
  *     mode when available, so playlists, podcasts and artists are reachable.
  *
- *   - v27.3: the Home tab auto-recovers from Spotify's "Something went
+ *   - v26.3: the Home tab auto-recovers from Spotify's "Something went
  *     wrong." feed error. The home GraphQL query is cached by React Query
  *     inside a provider mounted on the / layout route, so re-tapping Home
  *     (a popstate on the same route) never remounts it and the error page
@@ -69,14 +69,14 @@
  *     if the feed still will not load — performs a single reload guarded
  *     by a sessionStorage flag so it can never loop.
  *
- *   - v27.4: the bottom tab bar mirrors the native phone app exactly —
+ *   - v26.4: the bottom tab bar mirrors the native phone app exactly —
  *     Spotify's real Home / Search / Your Library glyphs (the leaning-book
  *     library mark replaces the placeholder bar chart), outline glyphs for
  *     inactive tabs and filled ones for the current tab, and the Home /
- *     Search / Your Library captions under the icons (v27.1 had gone
+ *     Search / Your Library captions under the icons (v26.1 had gone
  *     icon-only). The bar grows to 56px to fit icon + caption.
  *
- *   - v27.6.0: the home header now mirrors the phone app. The "Good
+ *   - v26.6.0: the home header now mirrors the phone app. The "Good
  *     evening" greeting is gone — the app has none — and Spotify's own
  *     All / Music / Podcasts filter chips (which the script used to hide
  *     along with the desktop feed header) are mirrored into the top bar as
@@ -90,7 +90,7 @@
  *     controls: a Connect-to-device button and a save-to-Liked-Songs
  *     check (green disc when saved), matching the native bar.
  *
- *   - v27.6.1: flat black home, like the phone app. Spotify washes the
+ *   - v26.6.1: flat black home, like the phone app. Spotify washes the
  *     top of the web home feed with a per-user color gradient and tints
  *     the top bar to match — the app has neither. Static CSS pins the
  *     home route's stylesheet layers (feed section, wrappers, top bar
@@ -100,7 +100,7 @@
  *     while backgrounds that layer real artwork (url(), e.g. promo
  *     banners) are left untouched.
  *
- *   - v27.6.2: the Library tab no longer bounces back to Home. Two
+ *   - v26.6.2: the Library tab no longer bounces back to Home. Two
  *     background events could close the library overlay right after it
  *     opened: Spotify's same-path history writes (boot-time URL
  *     normalization, persistence of its full-page-library "cinema"
@@ -115,7 +115,7 @@
  *     is gone; a real navigation (path change, back button, tab taps —
  *     including Home tapped while already on "/") still exits it.
  *
- *   - v27.7.0: performance pass — the hygiene loop no longer burns CPU
+ *   - v26.7.0: performance pass — the hygiene loop no longer burns CPU
  *     when nothing changed. Two structural findings drove it. First,
  *     Chromium fires mutation records even for no-op DOM writes (a
  *     classList toggle that leaves the state as it was, setAttribute
@@ -138,7 +138,7 @@
  *     idle computed-style reads 270k -> 0; while playing, 400k -> 12
  *     per six seconds.
  *
- *   - v27.8.0: the maximized player now plays the Canvas — the short
+ *   - v26.8.0: the maximized player now plays the Canvas — the short
  *     looping video Spotify ships for many tracks (the phone app swaps
  *     it in over the artwork while a track plays). The video URL is
  *     read through the same persisted GraphQL query Spotify's own
@@ -151,7 +151,7 @@
  *     the tab, and results are cached per track (negative results
  *     included) so toggling back and forth costs no requests.
  *
- *   - v27.9.0: fix the phone rendering everything postage-stamp sized.
+ *   - v26.9.0: fix the phone rendering everything postage-stamp sized.
  *     The page already ships a correct viewport meta and the script
  *     enforced it, but Firefox Android's "Desktop site" toggle (per-site,
  *     sticky, easy to enable by accident) makes the browser ignore the
@@ -171,14 +171,37 @@
  *     never pinch-zooms) and is re-asserted every hygiene pass; a
  *     one-time toast names the toggle as the root cause.
  *
- *   - v27.4.1: audit pass — guard the tab icon swap against duplicate
+ *   - v26.10.0: keep the OS media notification (and with it background
+ *     playback) alive across track transitions. With the screen off or
+ *     another app forward, the next track could start silently: the
+ *     notification did not re-appear, and a few seconds later Android
+ *     killed the audio. A hidden page only keeps its audio while that
+ *     notification exists, and the notification is fed by
+ *     navigator.mediaSession, which the page's own update can leave
+ *     empty or one track behind while the update races the new playback
+ *     — no notification, no background-audio exemption, dead player.
+ *     The script now watches the page's media element directly: its
+ *     play/pause/load events (which fire promptly in hidden tabs,
+ *     unlike timers) each re-assert the session, a 3s hidden-only poll
+ *     re-checks what the hooks could miss, and metadata is only written
+ *     when the current payload is empty or still shows the previous
+ *     track, so Spotify's own richer payload (album, multi-size
+ *     artwork) is never degraded while it is doing its job. Second net:
+ *     an element that pauses while the tab is hidden while the player
+ *     state still says "playing" is resumed — rate-limited to once per
+ *     15s, skipped when the bar says "Play" (a genuine pause from the
+ *     user, the notification or another device) and skipped when
+ *     another element is already audible (crossfade's outgoing element
+ *     pauses by design).
+ *
+ *   - v26.4.1: audit pass — guard the tab icon swap against duplicate
  *     route events (popstate + su:locationchange both fire per tap),
  *     clear a stale .su-player-host class when the native bar moves or
  *     unmounts, activate the mini player from the keyboard (Enter/Space
  *     — it advertised role=button but ignored keys), and relocate a
  *     stray comment into NAV_ICON_STATES.
  *
- *   - v27.5.0: fix pages frozen after leaving the Library tab. The
+ *   - v26.5.0: fix pages frozen after leaving the Library tab. The
  *     full-page library is Spotify's "cinema" state, not a route: while
  *     it is active Spotify renders #main-view with the inert attribute,
  *     so the next page (Search, Home, …) rendered fine but swallowed
@@ -2891,6 +2914,153 @@
     }
 
     /* ------------------------------------------------------------------ */
+    /* Media session watchdog (background playback)                        */
+    /* ------------------------------------------------------------------ */
+
+    // Android exempts a hidden page from process-lifecycle management only
+    // while its media notification exists — and that notification is fed
+    // by navigator.mediaSession. At a track transition the page's own
+    // metadata update races the new playback, and while the tab is hidden
+    // it can lose: the session ends up empty or one track behind, the
+    // notification never (re)appears, and Android kills the audio a few
+    // seconds in. The visible timeline is fine, which is why it only
+    // bites with the screen off or another app forward.
+    //
+    // This block keeps the session honest WITHOUT touching Spotify's own
+    // media-session code (their play/pause/skip action handlers stay
+    // theirs — replacing them with DOM-clicking fallbacks would trade a
+    // working path for a fragile one):
+    //   - the page's media element (created lazily by the player SDK, no
+    //     stable id — hence the self-healing scan below) fires
+    //     play/pause/load events that run even in hidden tabs, where our
+    //     hygiene loop deliberately does not; each event re-asserts the
+    //     session;
+    //   - metadata is only written when the current payload is empty or
+    //     still shows the previous track — Spotify's richer payload
+    //     (album, multi-size artwork) is never degraded while it is
+    //     current;
+    //   - a 3s hidden-only poll re-asserts what the hooks could have
+    //     missed (element appearing after the last scan, metadata
+    //     cleared without an element event);
+    //   - second net: an element that pauses while hidden while the
+    //     player state still says "playing" is resumed — a broken
+    //     transition, not a genuine pause (the bar then reads "Play").
+    //     Skipped when another element is already audible (crossfade's
+    //     outgoing element pauses by design) and rate-limited to once
+    //     per 15s so it can never fight a real pause.
+
+    const MS_TICK_MS = 3000;
+    const MS_RESUME_MIN_MS = 15000;
+    const MS_CANVAS_VIDEO_ID = 'su-full-canvas';
+    const msWatched = new WeakSet();
+    const msLedger = { playState: null, resumeAt: 0 };
+
+    // Audible-capable elements only: the muted canvas video and Spotify's
+    // muted visualizer clones never carry the session.
+    function mediaElements() {
+        if (typeof HTMLMediaElement === 'undefined') return [];
+        return Array.from(document.querySelectorAll('audio, video')).filter((el) =>
+            el instanceof HTMLMediaElement &&
+            !el.muted &&
+            el.id !== MS_CANVAS_VIDEO_ID
+        );
+    }
+
+    function watchMediaElements() {
+        for (const el of mediaElements()) {
+            if (msWatched.has(el)) continue;
+            msWatched.add(el);
+            el.addEventListener('playing', () => { assertMediaSession(); });
+            el.addEventListener('loadedmetadata', () => { assertMediaSession(); });
+            el.addEventListener('emptied', () => { assertMediaSession(); });
+            el.addEventListener('pause', () => {
+                assertMediaSession();
+                maybeResumeHiddenPlayback(el);
+            });
+            // An element can be born and start playing inside the boot gap
+            // before this scan ever sees it — its "playing" event is already
+            // gone, so assert right here on attach (guarded by staleness:
+            // no-op when Spotify's payload is current).
+            assertMediaSession();
+        }
+    }
+
+    // Spotify's own payload is preferred: write only when the session is
+    // empty or still describes the previous track. If the getter is
+    // unavailable, assume stale — an extra write is harmless.
+    function sessionIsStale(title) {
+        try {
+            const current = navigator.mediaSession.metadata;
+            return !current || current.title !== title;
+        } catch (error) {
+            return true;
+        }
+    }
+
+    function assertMediaSession() {
+        if (!('mediaSession' in navigator) || typeof window.MediaMetadata !== 'function') return;
+        let st = null;
+        try { st = readState(); } catch (error) { return; }
+        if (!st || !st.title) return;
+        if (sessionIsStale(st.title)) {
+            try {
+                navigator.mediaSession.metadata = new window.MediaMetadata({
+                    title: st.title,
+                    artist: st.artist || '',
+                    album: '',
+                    artwork: st.artUrl
+                        ? [{ src: st.artUrl, sizes: '640x640', type: 'image/jpeg' }]
+                        : [],
+                });
+            } catch (error) { /* session upkeep must never break playback */ }
+        }
+        const audible = mediaElements().find((el) => !el.paused) || null;
+        const ps = (st.playing === false || (st.playing == null && audible && audible.paused))
+            ? 'paused'
+            : 'playing';
+        if (msLedger.playState !== ps) {
+            msLedger.playState = ps;
+            try { navigator.mediaSession.playbackState = ps; } catch (error) { /* ditto */ }
+        }
+    }
+
+    function maybeResumeHiddenPlayback(el) {
+        if (!el || el.paused !== true || !document.hidden) return;
+        if (mediaElements().some((other) => other !== el && !other.paused)) return;
+        let st = null;
+        try { st = readState(); } catch (error) { return; }
+        if (!st || st.playing !== true) return;
+        const now = Date.now();
+        if (now - msLedger.resumeAt < MS_RESUME_MIN_MS) return;
+        msLedger.resumeAt = now;
+        try {
+            const played = el.play();
+            if (played && typeof played.catch === 'function') played.catch(() => {});
+        } catch (error) { /* ignored */ }
+    }
+
+    function startMediaWatchdog() {
+        if (!('mediaSession' in navigator)) return;
+        watchMediaElements();
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') assertMediaSession();
+        });
+        window.setInterval(() => {
+            watchMediaElements();
+            if (document.visibilityState !== 'hidden') return;
+            assertMediaSession();
+            // Resume path for pauses that fired before this element was
+            // watched (listener attach raced the element's birth). The
+            // pause-event path above covers the common case.
+            const els = mediaElements();
+            if (!els.some((el) => !el.paused)) {
+                const target = els.find((el) => el.readyState >= 2 && !el.ended) || els[0];
+                maybeResumeHiddenPlayback(target || null);
+            }
+        }, MS_TICK_MS);
+    }
+
+    /* ------------------------------------------------------------------ */
     /* Boot                                                                */
     /* ------------------------------------------------------------------ */
 
@@ -2901,6 +3071,7 @@
         ensureChrome();
         onRouteChange();
         runHygiene();
+        startMediaWatchdog();
         window.setTimeout(startObservers, 300);
     }
 

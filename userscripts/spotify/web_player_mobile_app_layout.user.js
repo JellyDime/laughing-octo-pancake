@@ -10,7 +10,8 @@
 // @noframes
 // @run-at       document-start
 // @downloadURL  https://raw.githubusercontent.com/JellyDime/laughing-octo-pancake/refs/heads/main/userscripts/spotify/web_player_mobile_app_layout.user.js
-// @homepageURL  https://github.com/JellyDime/laughing-octo-pancake/tree/main
+// @supportURL   https://github.com/JellyDime/laughing-octo-pancake/issues
+// @homepageURL  https://github.com/JellyDime/laughing-octo-pancake
 // ==/UserScript==
 
 /*
